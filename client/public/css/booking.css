@@ -1,0 +1,15 @@
+html{
+              height:100%;
+          }
+body{
+
+
+margin: 10px auto;
+
+
+}
+
+#map{
+    height:450px;
+    width:450px;
+          }

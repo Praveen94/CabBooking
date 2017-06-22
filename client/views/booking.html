@@ -1,0 +1,137 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-5">
+    <div id="map" ng-init="initMap()"></div>
+    </div>
+		<div class="col-md-4">
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+
+					<label for="inputLocation" class="col-sm-3 control-label">
+		Location:
+					</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="inputLoaction" ng-model="originLocation" />
+					</div>
+				</div>
+				<div class="form-group">
+
+					<label for="inputDestination" class="col-sm-3 control-label">
+		Destination:
+					</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="inputDestination" />
+					</div>
+				</div>
+
+
+        <div class="form-group">
+
+					<label for="cabType" class="col-sm-3 control-label">
+		Cab Type:
+					</label>
+					<div class="col-sm-9">
+
+
+            <select id="cabType" class="form-control">
+          <option>Micro</option>
+          <option>Mini</option>
+          <option>Prime Sedan</option>
+          <option>Prime SUV</option>
+
+
+          </select>
+
+          </div>
+					</div>
+
+          				<div class="form-group">
+          					<div class="col-sm-offset-3 col-sm-9">
+
+          						<button type="button" class="btn btn-default" ng-click="calcRoute()">
+          							Search Cab
+          						</button>
+                      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal5">
+          							Book Later
+          						</button>
+          					</div>
+
+
+          			</form>
+          		</div>
+				</div>
+
+
+		<div class="col-md-3">
+<form class="form-horizontal">
+			<div class="form-group">
+
+				<label for="distance" class="col-sm-3 control-label">
+			Distance:
+				</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="distance" disabled="disabled" />
+				</div>
+			</div>
+			<div class="form-group">
+
+				<label for="duration" class="col-sm-3 control-label">
+			Duration:
+				</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="duration" disabled="disabled" />
+				</div>
+			</div>
+
+</form>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="modal fade" id="myModal5" role="dialog">
+		<div class="modal-dialog">
+
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Advance Booking</h4>
+				</div>
+				<div class="modal-body">
+<form class="form-horizontal">
+					<div class="form-group">
+
+						<label for="bookingTime" class="col-sm-4 control-label">
+			Enter Booking Time :
+						</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="bookingTime" />
+						</div>
+					</div>
+					<div class="form-group">
+					</div>
+
+</form>
+
+
+
+
+
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Confirm Booking</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+</div>
