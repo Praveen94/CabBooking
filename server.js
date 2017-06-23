@@ -14,6 +14,7 @@ var peopleRoute = require('./server/routes/people');
 var tariffRoute=require('./server/routes/tariff');
 var userRoute=require('./server/routes/user');
 var cabRoute=require('./server/routes/cab');
+var bookingRoute=require('./server/routes/booking');
 
 
 
@@ -33,6 +34,8 @@ mongoose.connect('mongodb://localhost/meanapp').then(function(){
 app.use('/', tariffRoute);
 app.use('/', cabRoute);
 app.use('/', userRoute);
+app.use('/', bookingRoute);
+
 
 app.use('/api', peopleRoute);
 //

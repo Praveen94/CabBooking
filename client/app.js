@@ -30,49 +30,49 @@ app.config(function($routeProvider,$locationProvider) {
     });
 });
 
-app.run(function($rootScope,$cookies,$http,$location,$sessionStorage){
-  if($sessionStorage.tokenDetails){
-    $http.defaults.headers.common.Authorization=$sessionStorage.tokenDetails.token;
-  }
-
-$rootScope.$on('$locationChangeStart',function(event,next,current){
-var CustomerViews=['/changePassword','/booking'];
-var DriverViews=['/changePassword','/driver'];
-var AdminViews=['/changePassword','/tariff','/addcab'];
-var PublicViews=['/signup','/login'];
-var authUser=$cookies.getObject('authUser');
-if(authUser!=undefined){
-  var loggedInUser=authUser.currentUser.userInfo;
-}
-var viewsRestrict=PublicViews.indexOf($location.path())=== -1;
-if(!$sessionStorage.tokenDetails && viewsRestrict && $location.path() !==''){
-$location.path('/login');
-}else{
-if(authUser !=undefined){
-  if(authUser.currentUser.userInfo.usertype =='Customer'){
-    var Customer=CustomerViews.indexOf($location.path())=== -1;
-    if(Customer){
-      $location.path('/unauthorized');
-    }
-  }
-  if(authUser.currentUser.userInfo.usertype =='Admin'){
-    var Admin=AdminViews.indexOf($location.path())=== -1;
-    if(Admin){
-      $location.path('/unauthorized');
-    }
-  }
-  if(authUser.currentUser.userInfo.usertype =='Driver'){
-    var Driver=DriverViews.indexOf($location.path())=== -1;
-    if(Driver){
-      $location.path('/unauthorized');
-      }
-    }
-  }
-}
-
-
-
-});
-
-
-});
+// app.run(function($rootScope,$cookies,$http,$location,$sessionStorage){
+//   if($sessionStorage.tokenDetails){
+//     $http.defaults.headers.common.Authorization=$sessionStorage.tokenDetails.token;
+//   }
+//
+// $rootScope.$on('$locationChangeStart',function(event,next,current){
+// var CustomerViews=['/changePassword','/booking'];
+// var DriverViews=['/changePassword','/driver'];
+// var AdminViews=['/changePassword','/tariff','/addcab'];
+// var PublicViews=['/signup','/login'];
+// var authUser=$cookies.getObject('authUser');
+// if(authUser!=undefined){
+//   var loggedInUser=authUser.currentUser.userInfo;
+// }
+// var viewsRestrict=PublicViews.indexOf($location.path())=== -1;
+// if(!$sessionStorage.tokenDetails && viewsRestrict && $location.path() !==''){
+// $location.path('/login');
+// }else{
+// if(authUser !=undefined){
+//   if(authUser.currentUser.userInfo.usertype =='Customer'){
+//     var Customer=CustomerViews.indexOf($location.path())=== -1;
+//     if(Customer){
+//       $location.path('/unauthorized');
+//     }
+//   }
+//   if(authUser.currentUser.userInfo.usertype =='Admin'){
+//     var Admin=AdminViews.indexOf($location.path())=== -1;
+//     if(Admin){
+//       $location.path('/unauthorized');
+//     }
+//   }
+//   if(authUser.currentUser.userInfo.usertype =='Driver'){
+//     var Driver=DriverViews.indexOf($location.path())=== -1;
+//     if(Driver){
+//       $location.path('/unauthorized');
+//       }
+//     }
+//   }
+// }
+//
+//
+//
+// });
+//
+//
+// });

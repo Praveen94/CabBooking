@@ -39,4 +39,20 @@ $http.post('/AddTariff',$scope.Tariff).then(function(res){
         });
       };
 
+      $('#StartPeakHour').bootstrapMaterialDatePicker({
+        format : 'HH:mm',
+        date:false,
+       time:true,
+        });
+
+        $('#StopPeakHour').bootstrapMaterialDatePicker({
+          format : 'HH:mm',
+          date:false,
+         time:true,
+          });
+
+
+
+
+
     });

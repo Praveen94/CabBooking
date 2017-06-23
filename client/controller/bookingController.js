@@ -59,6 +59,8 @@ socket.on('sendLocation',function(data){
 
   console.log(data.msg);
 
+
+//driver marker
 var marker4Options = {
            position:{lat:data.msg.lat, lng:data.msg.lng},
            map: map,
@@ -106,7 +108,7 @@ geocodeLatLng1(geocoder, map, infowindow);
 
               autocompletesource.addListener('place_changed',onPlaceChangedSource);
               function onPlaceChangedSource(){
-
+                  console.log('Hello changed Source');
                   var place = autocompletesource.getPlace();
                   map.panTo(place.geometry.location);
               }
@@ -116,7 +118,7 @@ geocodeLatLng1(geocoder, map, infowindow);
               autocompletedestination.bindTo('bounds', map);
               autocompletedestination.addListener('place_changed',onPlaceChangedDestination);
               function onPlaceChangedDestination(){
-
+  console.log('Hello changed Dest');
                   var place = autocompletedestination.getPlace();
                   map.panTo(place.geometry.location);
               }
@@ -245,4 +247,26 @@ $scope.calcRoute=function(){
        }
        });
     }
+
+    $(document).ready(function(){
+      $("#bookingDate").datepicker({
+         showAnim: "fadeIn",
+
+       numberOfMonths: 1,
+         dateFormat: "dd MM yy",
+         minDate: +0,
+         maxDate: "1D",
+       });
+$('#bookingTime').bootstrapMaterialDatePicker({
+  format : 'HH:mm',
+  date:false,
+ time:true,
+  });
+
+
+    });
+
+
+
+
   });
