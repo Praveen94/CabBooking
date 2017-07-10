@@ -50,7 +50,6 @@ initTariff();
 
     $scope.DeleteTariff = function(tariff,event) {
 
-      // $scope.showConfirm = function(event) {
                      var confirm = $mdDialog.confirm()
                          .title('Are you sure to delete the record?')
                        .textContent('Record will be deleted permanently.')
@@ -58,7 +57,7 @@ initTariff();
                          .ok('Yes')
                          .cancel('No');
                          $mdDialog.show(confirm).then(function() {
-      //                   //   $scope.status = 'Record deleted successfully!';
+
       $http.delete('/DeleteTariff/' + tariff._id).then(function(response) {
                                     console.log('Deleted');
   initTariff();
@@ -87,19 +86,3 @@ initTariff();
 
 
     });
-
-    // $scope.showConfirm = function(event) {
-    //                var confirm = $mdDialog.confirm()
-    //                   .title('Are you sure to delete the record?')
-    //                   .textContent('Record will be deleted permanently.')
-    //                   .ariaLabel('TutorialsPoint.com')
-    //                   .targetEvent(event)
-    //                   .ok('Yes')
-    //                   .cancel('No');
-    //                   $mdDialog.show(confirm).then(function() {
-    //                   //   $scope.status = 'Record deleted successfully!';
-    //                   //    }, function() {
-    //                   //       $scope.status = 'You decided to keep your record.';
-    //                   // }
-    //                 });
-    //             };

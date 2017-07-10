@@ -22,17 +22,3 @@ angular.module('meanApp').controller('changePasswordController',['$rootScope','$
 
                       };
                     }]);
-
-// };
-//           });
-
-        // $http.put('/ChangePassword', $scope.Customer).then(function(response) {
-        //     console.log(response);
-        //   });
-              // window.alert('Customer data saved');
-              // var message = '<strong>Well done!</strong> You successfully read this important alert message.';
-              // Flash.create('success', message);
-
-//
-//     }
-// });

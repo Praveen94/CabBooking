@@ -24,15 +24,12 @@ if(response.data.userDetail.UserType=='Customer'|| response.data.userDetail.User
   $rootScope.$emit('CallLoginUser',{});
 
 }
-// initLogin();
-  // $location.path('/booking');
+
   location.href='#/home';
 
 }
 else{
   $scope.message=response.message;
-  // $scope.success=response.data.success;
-  // document.getElementById('msg').innerHTML=response.data.message;
 }
 
 

@@ -21,14 +21,7 @@ margin-bottom: 25px;
 	margin: 0 auto;
 	width: 400px;
 }
-/*.shape{
-	stroke-dasharray 140 640;
-	stroke-dashoffset: -590;
-	fill: transparent;
-	stroke:  rgb(250,250,250);
-	border-bottom: 5px solid black;
-	transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
-}*/
+
 .shape {
     stroke-dashoffset: -590;
     fill: transparent;

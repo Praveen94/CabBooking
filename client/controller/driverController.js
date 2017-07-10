@@ -33,7 +33,7 @@ console.log(origin2);
 
 
 
-    //  var myLatLng = {lat:myLat, lng:myLng};
+
     var map2Options = {
         center:{lat:myLat2, lng:myLng2},
         zoom: 7,
@@ -42,7 +42,6 @@ console.log(origin2);
     };
 
      window.map2 = new google.maps.Map(document.getElementById('map2'), map2Options);
-     //
 
 
 

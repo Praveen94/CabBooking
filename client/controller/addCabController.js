@@ -6,10 +6,7 @@ angular.module('meanApp').controller('addCabController', function($scope,$http,$
       console.log('initCab executed');
         $scope.DriverData = response.data;
     });
-
-
-
-  };
+};
 
 
 
@@ -33,7 +30,7 @@ $scope.Driver='';
 
     };
 
-//
+
 alert('Submit the form first and then upload the photo');
 
     $http.get('/getDriver').then(function(response) {
@@ -44,7 +41,7 @@ alert('Submit the form first and then upload the photo');
 
 
 
-//
+
     $scope.GetDriver= function(t) {
       $scope.DriverMobile=t.MobileNo;
         $http.get('/getDriver/'+t.MobileNo).then(function(response) {
@@ -79,15 +76,6 @@ alert('Submit the form first and then upload the photo');
 
 
 
- //    $scope.UpdateTariff=function(){
- //      $http.put('/UpdateTariff/'+$scope.DriverId,$scope.getTariff.data).then(function(res){
- //        console.log('Tariff data edited');
- //      });
- // };
-//
-//
-//
-//
     $scope.DeleteCab = function(d,event) {
       var confirm = $mdDialog.confirm()
           .title('Are you sure to delete the record?')

@@ -25,11 +25,6 @@ function showPosition(position) {
 window.origin=position.coords.latitude + "," + position.coords.longitude;
 myLat=position.coords.latitude;
 myLng=position.coords.longitude;
-// $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+origin+'&key=AIzaSyDkQCNIfRoHq8yCmZpU9J__yKa1ZAbE6GI').then(response => {
-//           currentLocation=response.data.results[0].formatted_address;
-//           console.log(response.data.results[0].formatted_address);
-//           $scope.originLocation=response.data.results[0].formatted_address;
-//           });
 var mapOptions = {
         center:{lat:myLat,lng:myLng},
         zoom: 7,
@@ -79,17 +74,12 @@ $scope.Booking.Driver=data.msg.driver;
 $http.get('/getCabDetail/'+data.msg.driver.MobileNo).then(function(response) {
 
         console.log(response.data);
-        // $scope.Booking.Cab=response.data;
+
          $scope.Booking.Cab=response.data[0];
 });
 
 });
 
-// socket.on('BookingID',function(data){
-//
-//   $scope.Booking.BookingID=data;
-//   console.log('Booking ID:',$scope.Booking.BookingID);
-// });
             google.maps.event.addListener(marker1, 'dragend', function(evt){
                 console.log('Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3));
                 myLat=evt.latLng.lat().toFixed(3);
@@ -115,10 +105,6 @@ $http.get('/getCabDetail/'+data.msg.driver.MobileNo).then(function(response) {
               autocompletesource.addListener('place_changed',onPlaceChangedSource);
               function onPlaceChangedSource(){
                   console.log('Hello changed Source');
-// $http.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${input}&key=AIzaSyDkQCNIfRoHq8yCmZpU9J__yKa1ZAbE6GI`).then(response => {
-//           console.log(response);
-//
-//           });
 
 
                   var place = autocompletesource.getPlace();
@@ -230,7 +216,7 @@ console.log(currentTime);
            //display route
           directionsDisplay.setDirections(result);
      $scope.Booking.Distance=result.routes[0].legs[0].distance.value/1000;
-    //  console.log('Distance :',$scope.Booking.Distance);
+
      }
 
 
@@ -263,42 +249,6 @@ function closestCab(custLat, custLong, driverLat, driverLong) {
   var adjust = 0.5 - calc((driverLat - custLat) * pos) / 2 + calc(custLat * pos) * calc(driverLat * pos)*(1 - calc((driverLong - custLong) * pos)) / 2;
   return 12742 * Math.asin(Math.sqrt(adjust));
 }
-
-
-
-
-
-function CalculateRoute(input,destination){
-
-       distance=document.getElementById("distance");
-       duration=document.getElementById("duration");
-
-
-
-         var request = {
-             origin: input,
-             destination: destination,
-             travelMode: google.maps.TravelMode.DRIVING,
-             unitSystem: google.maps.UnitSystem.METRIC
-         }
-
-         //pass the request to the route method
-         directionsService.route(request, function(result, status){
-         if(status == google.maps.DirectionsStatus.OK){
-             console.log(result);
-  marker1.setMap(null);
-             //Get distance and time
-
-             distance.value=result.routes[0].legs[0].distance.text;
-             duration.value=result.routes[0].legs[0].duration.text;
-             //display route
-            directionsDisplay.setDirections(result);
-  $scope.Booking.Distance=distance.value;
-  console.log('Distance :',$scope.Booking.Distance);
-     }
-         });
-}
-
 
 $scope.BookNow=function(){
 
@@ -352,11 +302,7 @@ socket.emit('getBookingInfo',{
 
 
 $scope.BookLaterButton=function(){
-// console.log(typeof $scope.Booking.Driver);
-//   if(typeof $scope.Booking.Driver=='undefined'){
-//     alert('No cabs available at this moment');
-//     return false;
-//   }
+
   document.getElementById("fare").value="";
   document.getElementById("fare2").value="";
 }
@@ -371,38 +317,11 @@ $scope.BookLaterButton=function(){
      console.log(`Input is:${input}`);
      destination=document.getElementById("inputDestination").value;
      console.log(`Destination is:${destination}`);
-// CalculateRoute(input,destination);
 
-      // console.log(currentDate.getHours());
-      // console.log(currentDate.getMinutes());
-      // console.log(input.value);
+
+
       $scope.Booking.PickupLocation=input;
       $scope.Booking.DestinationLocation=destination;
-// console.log($scope.Booking.CabType);
-// $http.get('/GetTariff').then(function(response) {
-//     console.log(response.data);
-//     tariff=response.data;
-//     console.log(tariff.length);
-//     for(i=0;i<tariff.length;i++){
-//       if($scope.Booking.CabType==tariff[i].CabType){
-//         if($scope.Booking.PickUpTime>=tariff[i].StartPeakTime && $scope.Booking.PickUpTime<=tariff[i].StopPeakTime)
-// {
-//   $scope.Booking.Fare=Math.ceil(tariff[i].PeakRate*$scope.Booking.Distance);
-//   console.log(`Peak Time ${i}: `,$scope.Booking.PickUpTime);
-// }
-// else{
-//   $scope.Booking.Fare=Math.ceil(tariff[i].NormalRate*$scope.Booking.Distance);
-//   console.log(`Normal Time ${i}: `,$scope.Booking.PickUpTime);
-// }
-//       }
-//     }
-//
-//
-// console.log('Finally :',$scope.Booking);
-//
-// });
-//
-// console.log('Rate : ',$scope.Booking.Distance);
 
 $http.post('/AddBookingLater',$scope.Booking).then(function(res){
   console.log('BookingLater Data Saved');
@@ -445,10 +364,6 @@ $http.get('/GetTariff').then(function(response) {
   });
 
   console.log('Rate : ',$scope.Booking.Distance);
-
-  // $http.post('/AddBookingLater',$scope.Booking).then(function(res){
-  //   console.log('BookingLater Data Saved');
-  // });
 
 };
 $scope.DeleteBooking = function(d,event) {

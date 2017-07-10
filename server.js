@@ -64,10 +64,7 @@ socket.on('CancelBooking',function(data){
   console.log(data);
   io.sockets.emit('CancelBooking',data);
 });
-// socket.on('sendCustomerLocation',function(data){
-//   console.log(data);
-//   io.sockets.emit('sendCustomerLocation',data);
-// });
+
 
 
 });
@@ -96,8 +93,3 @@ app.post("/api/Upload", function (req, res) {
 server.listen(3000,function(req,res){
   console.log('Server is running on port 3000...');
 });
-
-//
-// app.listen(3000, function(req, res) {
-//     console.log('Server is running on port 3000...');
-// });
