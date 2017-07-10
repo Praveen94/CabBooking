@@ -10,7 +10,7 @@ var server=require('http').Server(app);
 var io=require('socket.io')(server);
 
 
-var peopleRoute = require('./server/routes/people');
+
 var tariffRoute=require('./server/routes/tariff');
 var userRoute=require('./server/routes/user');
 var cabRoute=require('./server/routes/cab');
@@ -23,12 +23,12 @@ app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, '/client')));
 
-mongoose.Promise=global.Promise;
 
-mongoose.connect('mongodb://localhost/meanapp').then(function(){
-  console.log('Database connected');
-}).catch(function(e){
-  console.log(e);
+mongoose.connect('mongodb://localhost/meanapp');
+var db=mongoose.connection;
+db.on('error',console.error.bind(console,'connection error'));
+db.once('open',function(){
+  console.log('Database Connected');
 });
 
 app.use('/', tariffRoute);
@@ -37,15 +37,60 @@ app.use('/', userRoute);
 app.use('/', bookingRoute);
 
 
-app.use('/api', peopleRoute);
-//
+
+
 io.on('connection',function(socket){
-console.log('Socket:',socket.id);
+console.log('Socket: ',socket.id);
+io.sockets.emit('BookingID',socket.id);
 socket.on('getLocation',function(data){
   console.log(data);
   io.sockets.emit('sendLocation',data);
 });
+socket.on('getBookingID',function(data){
+  console.log(data);
+  io.emit('sendBookingID',socket.id);
+});
 
+
+socket.on('getDriverInfo',function(data){
+  console.log(data);
+  io.sockets.emit('sendDriverInfo',data);
+});
+socket.on('getBookingInfo',function(data){
+  console.log(data);
+  io.sockets.emit('sendBookingInfo',data);
+});
+socket.on('CancelBooking',function(data){
+  console.log(data);
+  io.sockets.emit('CancelBooking',data);
+});
+// socket.on('sendCustomerLocation',function(data){
+//   console.log(data);
+//   io.sockets.emit('sendCustomerLocation',data);
+// });
+
+
+});
+var Storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "./client/public/images");
+    },
+    filename: function (req, file, callback) {
+        callback(null,file.originalname);
+    }
+});
+
+var upload = multer({ storage: Storage }).array("imgUploader", 3); //Field name and max count
+
+
+
+app.post("/api/Upload", function (req, res) {
+    upload(req, res, function (err) {
+        if (err) {
+            return res.end("Something went wrong!");
+        }
+        return res.end("File uploaded sucessfully!.");
+    });
 });
 
 server.listen(3000,function(req,res){

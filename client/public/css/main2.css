@@ -50,7 +50,7 @@ body {
 	font-size: 13px;
 }
 
-.msform .action-button {
+/*.msform .action-button {
 	width: 150px;
 	background: #27AE60;
 	font-weight: bold;
@@ -60,10 +60,10 @@ body {
 	cursor: pointer;
 	padding: 10px 5px;
 	margin: 10px 5px;
-}
-.msform .action-button:hover, .msform .action-button:focus {
+}*/
+/*.msform .action-button:hover, .msform .action-button:focus {
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
-}
+}*/
 
 .fs-title {
 	font-size: 15px;
@@ -212,4 +212,78 @@ button.close {
 
 .alert.ng-leave-active {
     opacity: 0;
+}
+
+.msform .action-button{
+	background: #0b3e56;
+	color: #ccc;
+	width: 180px;
+
+	border: 0;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+	font-size: 18px;
+
+	font-family: 'Raleway', sans-serif;
+	-webkit-transition: .6s;
+	transition: .6s;
+	overflow: hidden;
+}
+.msform .action-button:focus{
+	outline: 0;
+}
+.msform .action-button:before{
+	content: '';
+	display: block;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.5);
+	width: 60px;
+	height: 100%;
+	left: 0;
+	top: 0;
+	opacity: .5;
+	-webkit-filter: blur(30px);
+	filter: blur(30px;);
+	-webkit-transform: translateX(-100px) skewX(-15deg);
+	transform: translateX(-100px) skewX(-15deg);
+}
+
+.msform .action-button:after{
+	content: '';
+	display: block;
+	position: absolute;
+	background: rgba(255, 255, 255, .02);
+
+	width: 30px;
+	height: 100%;
+	left: 30px;
+	top: 0;
+	opacity: 0;
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+	-webkit-transform: translateX(-100px) skewX(-15deg);
+	transform: translateX(-100px) skewX(-15deg);
+}
+
+.msform .action-button:hover{
+	background:rgba(198, 4, 255, 0.6);
+	cursor: pointer;
+}
+
+.msform .action-button:hover:before{
+	-webkit-transform: translateX(300px) skewX(-15deg);
+	transform: translateX(300px) skewX(-15deg);
+	opacity: 0.6;
+	-webkit-transition: .7s;
+	transition: .7s;
+}
+
+.msform .action-button:hover:after{
+	-webkit-transform: translateX(300px) skewX(-15deg);
+	transform: translateX(300px) skewX(-15deg);
+	opacity: 1;
+	-webkit-transition: .7s;
+	transition: .7s.
 }

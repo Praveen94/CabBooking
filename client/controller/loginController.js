@@ -1,17 +1,38 @@
-angular.module('meanApp').controller('loginController',function($scope, $http,AuthenticationService){
+angular.module('meanApp').controller('loginController',function($rootScope,$scope,$cookies,$http,AuthenticationService,$location){
+$scope.Login={};
 function initController(){
   AuthenticationService.Logout();
 };
+initController();
 
 
-    $scope.LoginUser = function() {
-        AuthenticationService.Login($scope.Login,function(response){
-        if(response.success ===true){
-          
-          $location.path('/booking');
-        }
+    $scope.LoginUser = function(Login) {
+
+
+          AuthenticationService.Login($scope.Login,function(response){
+
+if(response.data.success===false){
+  alert(' Password / Email ID is invalid');
+  return false;
+}
+        if(response.data.success ===true){
+          console.log('Success',response.data);
+if(response.data.userDetail.UserType=='Customer'|| response.data.userDetail.UserType=='Admin'){
+  $rootScope.$emit('CallLoginUser',{});
+
+}else if(response.data.userDetail.UserType=='Driver'){
+  $rootScope.$emit('CallLoginUser',{});
+
+}
+// initLogin();
+  // $location.path('/booking');
+  location.href='#/home';
+
+}
 else{
   $scope.message=response.message;
+  // $scope.success=response.data.success;
+  // document.getElementById('msg').innerHTML=response.data.message;
 }
 
 

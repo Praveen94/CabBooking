@@ -21,7 +21,12 @@ var ob={
 
       Email:res.data.userDetail.Email,
       FirstName:res.data.userDetail.FirstName,
-      usertype:res.data.userDetail.UserType
+      LastName:res.data.userDetail.LastName,
+      usertype:res.data.userDetail.UserType,
+      MobileNo:res.data.userDetail.MobileNo
+
+
+
     }
   }
 };
@@ -38,5 +43,6 @@ function Logout(){
   delete $sessionStorage.tokenDetails;
   $http.defaults.headers.common.Authorization='';
   $cookies.remove('authUser');
+  console.log('User Logged Out');
 }
 });

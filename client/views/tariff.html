@@ -29,7 +29,7 @@
 
   <div class="form-group">
             <label for="peakhour">Start Peak Hour:</label>
-  <input type='text' id="StartPeakHour" ng-model="Tariff.StartPeakTime"  />
+  <input type='text' id="StartPeakHour" class="form-control" ng-model="Tariff.StartPeakTime"  />
 
 
 
@@ -44,7 +44,7 @@
 
           <div class="form-group">
                       <label for="peakhour">Stop Peak Hour:</label>
-                      <input type='text' id="StopPeakHour" ng-model="Tariff.StopPeakTime"/>
+                      <input type='text' class="form-control" id="StopPeakHour" ng-model="Tariff.StopPeakTime"/>
   <br />
   </div>
 
@@ -100,7 +100,7 @@
 
   <div class="form-group">
             <label for="peakhour">Start Peak Hour:</label>
-  <input type='text' name='timepicker' ng-model="getTariff.data.StartPeakTime"  />
+  <input type='text' name='timepicker' class="form-control" ng-model="getTariff.data.StartPeakTime"  />
 
 
 
@@ -115,7 +115,7 @@
 
           <div class="form-group">
                       <label for="peakhour">Stop Peak Hour:</label>
-                      <input type='text' name='timepicker' ng-model="getTariff.data.StopPeakTime"/>
+                      <input type='text' name='timepicker' class="form-control" ng-model="getTariff.data.StopPeakTime"/>
   <br />
   </div>
 
@@ -176,7 +176,7 @@
     <td>{{t.StartPeakTime}}</td>
     <td>{{t.StopPeakTime}}</td>
     <td><button class="btn btn-warning btn-xs" ng-click="GetTariff(t)" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-edit"></span></button></td>
-    <td><button class="btn btn-danger btn-xs" ng-click="DeleteTariff(t)"><span class="glyphicon glyphicon-trash"></span></button></td>
+    <td><button class="btn btn-danger btn-xs" ng-click="DeleteTariff(t,$event)"><span class="glyphicon glyphicon-trash"></span></button></td>
 </tr>
 </table>
 

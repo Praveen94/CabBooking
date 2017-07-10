@@ -14,12 +14,12 @@
 
                         <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input type="text" class="form-control" ng-model="Login.Email"  placeholder="email">
+                                    <input type="text" class="form-control" ng-model="Login.Email"  placeholder="email" required>
                                 </div>
 
                         <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input type="password" class="form-control" ng-model="Login.Password" placeholder="password">
+                                    <input type="password" class="form-control" ng-model="Login.Password" placeholder="password" required>
                                 </div>
 
 
@@ -30,7 +30,7 @@
                                 <!-- Button -->
 
                                 <div class="col-sm-12 controls">
-                                <center>  <a class="btn btn-primary"  ng-click="LoginUser()">Login  </a>
+                                <center>  <a class="btn btn-primary" ng-click="LoginUser(Login)">Login  </a>
                                 </center>
 
                                 </div>

@@ -1,6 +1,23 @@
-angular.module('meanApp').controller('addCabController', function($scope,$http) {
+angular.module('meanApp').controller('addCabController', function($scope,$http,$mdDialog) {
+
+  var initCab=function(){
+
+    $http.get('/getDriver').then(function(response) {
+      console.log('initCab executed');
+        $scope.DriverData = response.data;
+    });
+
+
+
+  };
+
+
+
 
 $scope.AddCab=function(){
+
+$scope.Driver.Photo=document.getElementById('Fname').value+'.jpg';
+
 
 $http.post('/AddDriver',$scope.Driver).then(function(res){
   console.log('Driver Data Saved');
@@ -9,11 +26,16 @@ $http.post('/AddDriver',$scope.Driver).then(function(res){
 $http.post('/AddCab',$scope.Driver).then(function(res){
   console.log('Cab Data Saved');
 });
+initCab();
+$scope.Driver='';
 
 
 
     };
+
 //
+alert('Submit the form first and then upload the photo');
+
     $http.get('/getDriver').then(function(response) {
       console.log(response.data);
         $scope.DriverData = response.data;
@@ -51,22 +73,29 @@ $http.post('/AddCab',$scope.Driver).then(function(res){
               console.log('Driver data edited');
             });
 
+            initCab();
        };
 
 
 
 
-    $scope.UpdateTariff=function(){
-      $http.put('/UpdateTariff/'+$scope.DriverId,$scope.getTariff.data).then(function(res){
-        console.log('Tariff data edited');
-      });
- };
+ //    $scope.UpdateTariff=function(){
+ //      $http.put('/UpdateTariff/'+$scope.DriverId,$scope.getTariff.data).then(function(res){
+ //        console.log('Tariff data edited');
+ //      });
+ // };
 //
 //
 //
 //
-    $scope.DeleteCab = function(d) {
-
+    $scope.DeleteCab = function(d,event) {
+      var confirm = $mdDialog.confirm()
+          .title('Are you sure to delete the record?')
+        .textContent('Record will be deleted permanently.')
+          .targetEvent(event)
+          .ok('Yes')
+          .cancel('No');
+          $mdDialog.show(confirm).then(function() {
       $http.delete('/DeleteDriver/' + d.MobileNo).then(function(response) {
           console.log('Driver Deleted');
       });
@@ -74,6 +103,11 @@ $http.post('/AddCab',$scope.Driver).then(function(res){
         $http.delete('/DeleteCab/' + d.MobileNo).then(function(response) {
             console.log('Cab Deleted');
         });
+
+        initCab();
+}, function() {
+console.log('You decided to keep your record.');
+});
       };
 
     });

@@ -166,21 +166,21 @@ if(error){
 else if(!user){
 res.json({
   success:false,
-  message:'Email Id not found'
+  message:'Email ID is not found'
 });
-console.log('Email Not Found');
-}else if(!user.validPassword(req.body.Password)){
+console.log('Email ID is not found');
+}else if(!user.validPassword(req.body.Password)){ //validate password
 res.json({
   success:false,
-  message:'Entered Wrong Password'
+  message:'You entered a wrong password'
 });
-console.log('Entered a wrong password');
+console.log('You entered a wrong password');
 
 }else if(user){
-  var token=jwt.sign(user,'mysecret',{
+  var token=jwt.sign(user,'mysecret',{ //creating jwt token
     expiresIn:2000
   });
-res.json({
+res.json({  //sending token details
   token:token,
   isLoggedIn:true,
 userDetail:user,
@@ -215,4 +215,29 @@ console.log(docs);
 });
 
 });
+
+router.post('/AddAdmin',function(req,res){
+
+var newAdmin=new User();
+
+newAdmin.UserType='Admin',
+newAdmin.Password=newAdmin.generateHash('admin'),
+newAdmin.MobileNo=req.body.MobileNo,
+newAdmin.Email=req.body.Email,
+newAdmin.LastName=req.body.LastName,
+newAdmin.FirstName=req.body.FirstName
+
+
+newAdmin.save().then(function(docs){
+  console.log('User Data Saved',docs);
+},function(err){
+  console.log(err);
+});
+
+});
+
+
+
+
+
 module.exports=router;

@@ -8,21 +8,28 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-            <a class="navbar-brand" href="#">CabBooking</a>
+            <a class="navbar-brand" href="#/home">BookMyCab</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
             <ul class="nav navbar-nav">
-                <li><a href="#/signup" ng-hide='Customer'>SignUp</a></li>
-                <li><a href="#/addcab">Add Cab</a></li>
-                <li><a href="#/login">Login</a></li>
-                  <li><a href="#/changePassword">Change Password</a></li>
+                <li ng-show="navigation.isLoggedIn" ng-hide="!navigation.isLoggedIn"><a href="#/home">Welcome, {{navigation.userName}}</a></li>
+                <li ng-hide="navigation.isLoggedIn && navigation.userType=='Customer' || navigation.userType=='Driver' ||navigation.userType=='Admin'" ng-show="!navigation.isLoggedIn"><a href="#/signup">SignUp</a></li>
+                <li ng-show="navigation.isLoggedIn && navigation.userType=='Admin'"><a href="#/addcab">Add Cab</a></li>
+                <li ng-show="navigation.isLoggedIn && navigation.userType=='Admin'"><a href="#/tariff">Add Tariff</a></li>
+                <li ng-hide="navigation.isLoggedIn && navigation.userType=='Customer' || navigation.userType=='Driver' ||navigation.userType=='Admin'" ng-show="!navigation.isLoggedIn"><a href="#/login">Login</a></li>
+                  <li ng-show="navigation.isLoggedIn && navigation.userType=='Customer' || navigation.userType=='Driver' ||navigation.userType=='Admin'" ng-hide="!navigation.isLoggedIn"><a href="#/changePassword">Change Password</a></li>
 
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-<li><a href="#/booking">Booking</a></li>
-<li><a href="#/driver">Driver</a></li>
+<li ng-show="navigation.isLoggedIn && navigation.userType=='Customer'"><a href="#/booking">Booking</a></li>
+
+<li ng-show="navigation.isLoggedIn && navigation.userType=='Driver'"><a href="#/driver">Driver</a></li>
+<li ng-show="navigation.isLoggedIn && navigation.userType=='Customer'"><a href="#/rideHistory">Ride History</a></li>
+<li ng-show="navigation.isLoggedIn && navigation.userType=='Customer' || navigation.userType=='Driver' ||navigation.userType=='Admin'" ng-hide="!navigation.isLoggedIn"><a href="#/" ng-click="LogoutUser()">Logout</a></li>
+
 </ul>
 
         </div>

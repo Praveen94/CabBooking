@@ -1,0 +1,12 @@
+
+
+/*.home{
+    background-image: url(../public/images/cab2.png);
+    background-repeat: no-repeat;
+
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+<img src="../public/images/cab2.png" style="position: absolute;left: 0px;top: 0px;z-index: -1;"*/

@@ -5,7 +5,7 @@ var Cab=require('../models/CabModel');
 router.post('/AddCab',function(req,res){
 
 newCab=new Cab();
-// newCab.Photo=req.body.Photo,
+newCab.Photo=req.body.Photo,
 newCab.MobileNo=req.body.MobileNo,
 newCab.RegisterNo=req.body.RegisterNo,
 newCab.Model=req.body.Model,

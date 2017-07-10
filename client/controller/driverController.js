@@ -1,4 +1,4 @@
-angular.module('meanApp').controller('driverController',function($scope, $http,$window) {
+angular.module('meanApp').controller('driverController',function($scope, $http,$window,$cookies) {
   this.$window=$window;
 var socket=io();
 
@@ -6,7 +6,16 @@ var socket=io();
 
 
   $scope.initMap2=function(){
-    if (navigator.geolocation) {
+console.log($cookies.getObject('authUser').currentUser.userInfo);
+var driver=$cookies.getObject('authUser').currentUser.userInfo;
+
+socket.emit('getDriverInfo',{
+  'msg':{
+            driver:driver
+          }
+});
+
+if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
 
     }
@@ -46,7 +55,6 @@ console.log(origin2);
      var marker3Options = {
                 position:{lat:myLat2, lng:myLng2},
                 map: map2,
-                draggable: true,
                 animation: google.maps.Animation.DROP
             }
             var marker3 = new google.maps.Marker(marker3Options);
@@ -62,4 +70,40 @@ socket.emit('getLocation',{
 
 }
   };
+
+
+  socket.on('sendBookingInfo',function(data){
+    $scope.DriverDisplay=data;
+  var customerLat=parseFloat(data.msg.lat);
+    var customerLng=parseFloat(data.msg.lng);
+console.log(typeof customerLat);
+    console.log('Customer Lat',data.msg.lat);
+    var marker5Options = {
+               position:{lat:customerLat, lng:customerLng},
+               map: map2,
+               animation: google.maps.Animation.DROP
+           }
+           window.marker5 = new google.maps.Marker(marker5Options);
+
+    console.log(data.msg.Booking.CabType);
+    console.log($scope.DriverDisplay);
+document.getElementById('PickupLocation').value=$scope.DriverDisplay.msg.Booking.PickupLocation;
+document.getElementById('DestinationLocation').value=$scope.DriverDisplay.msg.Booking.DestinationLocation;
+document.getElementById('CustomerName').value=$scope.DriverDisplay.msg.Booking.Customer.FirstName;
+document.getElementById('ContactNumber').value=$scope.DriverDisplay.msg.Booking.Customer.MobileNo;
+document.getElementById('TotalFare').value=$scope.DriverDisplay.msg.Booking.Fare;
+
+});
+
+
+socket.on('CancelBooking',function(data){
+console.log(data);
+document.getElementById('PickupLocation').value='';
+document.getElementById('DestinationLocation').value='';
+document.getElementById('CustomerName').value='';
+document.getElementById('ContactNumber').value='';
+document.getElementById('TotalFare').value='';
+  alert('Your Cab was cancelled by the customer');
+marker5.setMap(null);
+});
 });

@@ -1,17 +1,23 @@
 <div class="container-fluid">
 <div class="row">
-  <div class="col-xs-2">
+  <div class="col-xs-2" style="margin-top:20px;">
     <p class="lead"><u>Upload Photo</u></p>
     <img src="../public/images/profile-icon.png" height="80%" width="60%"/>
-  <input type="file" id="profile" ng-model="Driver.Photo"/>
+  <!-- <input type="file" id="profile" ng-model="Driver.Photo"/> -->
+  <form id="frmUploader" enctype="multipart/form-data" action="api/Upload/" method="post">
+        <!-- <input type="file" name="imgUploader" ng-model="Driver.Photo" multiple /> -->
+        <input type="file" name="imgUploader" multiple />
+        <input type="submit" name="submit" id="btnSubmit" target="_blank" value="Upload" />
+    </form>
+
   </div>
-  <div class="col-xs-4">
+  <div class="col-xs-4" style="margin-top:20px;">
     <p style="padding:0px;margin:0px;" class="lead">Driver Details</p>
 <hr style="margin-top:0px;border-top: 1px solid #ccc;">
     <div class="row">
 
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="First Name" ng-model="Driver.FirstName" />
+      <input type="text" class="form-control" id="Fname" placeholder="First Name" ng-model="Driver.FirstName" />
 </div>
 
 
@@ -68,7 +74,7 @@
 
   </div>
 
-  <div class="col-xs-offset-1 col-xs-5">
+  <div class="col-xs-offset-1 col-xs-5" style="margin-top:20px;">
 
 <table class="table table-bordered">
 <tr>
@@ -81,12 +87,12 @@
 
 </tr>
 <tr ng-repeat="d in DriverData">
-  <td></td>
+  <td><img ng-src="../public/images/{{d.FirstName}}.jpg" height="70px" width="70px" /></td>
   <td>{{d.FirstName}}</td>
   <td>{{d.Email}}</td>
   <td>{{d.MobileNo}}</td>
   <td><button class="btn btn-warning btn-xs" ng-click="GetDriver(d)" data-toggle="modal" data-target="#myModal3"><span class="glyphicon glyphicon-edit"></span></button></td>
-  <td><button class="btn btn-danger btn-xs" ng-click="DeleteCab(d)"><span class="glyphicon glyphicon-trash"></span></button></td>
+  <td><button class="btn btn-danger btn-xs" ng-click="DeleteCab(d,$event)"><span class="glyphicon glyphicon-trash"></span></button></td>
 </tr>
 </table>
   </div>

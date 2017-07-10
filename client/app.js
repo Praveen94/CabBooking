@@ -1,12 +1,9 @@
-var app = angular.module('meanApp', ['ngRoute','ngFlash','ngAnimate', 'ngStorage', 'ngCookies']);
+var app = angular.module('meanApp', ['ngRoute','ngFlash','ngAnimate', 'ngStorage', 'ngCookies','ngMaterial']);
 app.config(function($routeProvider,$locationProvider) {
   $locationProvider.hashPrefix('');
     $routeProvider.when('/tariff', {
         templateUrl: './views/tariff.html',
         controller: 'tariffController'
-    }).when('/create', {
-        templateUrl: './views/create.html',
-        controller: 'createController'
     }).when('/addcab',{
       templateUrl: './views/addcab.html',
       controller: 'addCabController'
@@ -25,54 +22,59 @@ app.config(function($routeProvider,$locationProvider) {
     }).when('/driver', {
         templateUrl: './views/driver.html',
         controller: 'driverController'
+    }).when('/rideHistory', {
+        templateUrl: './views/rideHistory.html',
+        controller: 'rideHistoryController'
+    }).when('/home', {
+        templateUrl: './views/home.html'
     }).when('/unauthorized', {
         templateUrl: './views/unauthorized.html'
     });
 });
 
-// app.run(function($rootScope,$cookies,$http,$location,$sessionStorage){
-//   if($sessionStorage.tokenDetails){
-//     $http.defaults.headers.common.Authorization=$sessionStorage.tokenDetails.token;
-//   }
-//
-// $rootScope.$on('$locationChangeStart',function(event,next,current){
-// var CustomerViews=['/changePassword','/booking'];
-// var DriverViews=['/changePassword','/driver'];
-// var AdminViews=['/changePassword','/tariff','/addcab'];
-// var PublicViews=['/signup','/login'];
-// var authUser=$cookies.getObject('authUser');
-// if(authUser!=undefined){
-//   var loggedInUser=authUser.currentUser.userInfo;
-// }
-// var viewsRestrict=PublicViews.indexOf($location.path())=== -1;
-// if(!$sessionStorage.tokenDetails && viewsRestrict && $location.path() !==''){
-// $location.path('/login');
-// }else{
-// if(authUser !=undefined){
-//   if(authUser.currentUser.userInfo.usertype =='Customer'){
-//     var Customer=CustomerViews.indexOf($location.path())=== -1;
-//     if(Customer){
-//       $location.path('/unauthorized');
-//     }
-//   }
-//   if(authUser.currentUser.userInfo.usertype =='Admin'){
-//     var Admin=AdminViews.indexOf($location.path())=== -1;
-//     if(Admin){
-//       $location.path('/unauthorized');
-//     }
-//   }
-//   if(authUser.currentUser.userInfo.usertype =='Driver'){
-//     var Driver=DriverViews.indexOf($location.path())=== -1;
-//     if(Driver){
-//       $location.path('/unauthorized');
-//       }
-//     }
-//   }
-// }
-//
-//
-//
-// });
-//
-//
-// });
+app.run(function($rootScope,$cookies,$http,$location,$sessionStorage){
+  if($sessionStorage.tokenDetails){
+    $http.defaults.headers.common.Authorization=$sessionStorage.tokenDetails.token;
+  }
+
+$rootScope.$on('$locationChangeStart',function(event,next,current){
+var CustomerViews=['/changePassword','/booking','/rideHistory','/home'];
+var DriverViews=['/changePassword','/driver','/home'];
+var AdminViews=['/changePassword','/tariff','/addcab','/home'];
+var PublicViews=['/signup','/login','/home'];
+var authUser=$cookies.getObject('authUser');
+if(authUser!=undefined){
+  var loggedInUser=authUser.currentUser.userInfo;
+}
+var viewsRestrict=PublicViews.indexOf($location.path())=== -1;
+if(!$sessionStorage.tokenDetails && viewsRestrict && $location.path() !==''){
+$location.path('/login');
+}else{
+if(authUser !=undefined){
+  if(authUser.currentUser.userInfo.usertype =='Customer'){
+    var Customer=CustomerViews.indexOf($location.path())=== -1;
+    if(Customer){
+      $location.path('/unauthorized');
+    }
+  }
+  if(authUser.currentUser.userInfo.usertype =='Admin'){
+    var Admin=AdminViews.indexOf($location.path())=== -1;
+    if(Admin){
+      $location.path('/unauthorized');
+    }
+  }
+  if(authUser.currentUser.userInfo.usertype =='Driver'){
+    var Driver=DriverViews.indexOf($location.path())=== -1;
+    if(Driver){
+      $location.path('/unauthorized');
+      }
+    }
+  }
+}
+
+
+
+});
+
+
+});

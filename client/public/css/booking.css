@@ -13,3 +13,15 @@ margin: 10px auto;
     height:450px;
     width:450px;
           }
+
+.label-left{
+
+  color: #B4886B;
+  font-weight: bold;
+  display:inline-block;
+
+  float:left;
+
+
+
+}
