@@ -8,7 +8,7 @@ var logger = require('morgan');
 var path = require('path');
 var server=require('http').Server(app);
 var io=require('socket.io')(server);
-
+const port=process.env.PORT||3000;
 
 
 var tariffRoute=require('./server/routes/tariff');
@@ -90,6 +90,6 @@ app.post("/api/Upload", function (req, res) {
     });
 });
 
-server.listen(3000,function(req,res){
-  console.log('Server is running on port 3000...');
+server.listen(port,function(req,res){
+  console.log(`Server is running on port ${port}...`);
 });
